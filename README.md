@@ -54,7 +54,7 @@ Eine komfortable CMD “App” für Windows 10/11, die die Open-Source-App “be
 - “Mein Virenschutz warnt – ist das gefährlich?”  
   Vorsorgliche Warnungen sind bei Automationsskripten normal. Der Code ist transparent, lädt nur notwendige Komponenten und richtet die App lokal ein. Bei Unsicherheit den Inhalt vor Ausführung einsehen.  
 - “Brauche ich Admin‑Rechte?”  
-  Empfohlen, damit Installation/Setup reibungslos erfolgen. Das Skript zeigt einen 5‑Sekunden‑Timer und startet sich automatisch erhöht neu.  
+  Ja Empfohlen, damit Installation/Setup reibungslos erfolgen. Das Skript zeigt einen 5‑Sekunden‑Timer und startet sich automatisch erhöht neu.  
 - “Der Port 49200 ist belegt.”  
   In Start_BetterBahn.cmd bzw. im Setup‑Skript DEV_PORT einfach auf einen freien Port ändern (z. B. 49210).  
 - “pnpm wird nicht gefunden.”  
@@ -74,13 +74,13 @@ Eine komfortable CMD “App” für Windows 10/11, die die Open-Source-App “be
 - Optional: pnpm‑Ordner im %LOCALAPPDATA% bereinigen  
 
 ## Beiträge willkommen 🤝
-Fehler gefunden, Idee oder Verbesserung? Pull Requests und Issue‑Meldungen sind sehr willkommen – bitte mit kurzer Problembeschreibung, Log‑Ausschnitt und Windows‑Version.  
+Fehler gefunden, Idee oder Verbesserung? Pull Requests und Issue‑Meldungen sind sehr willkommen – bitte mit kurzer Problembeschreibung. 
 
 ## Lizenz 📜
-Dieses Projekt steht unter einer offenen Lizenz (bitte im Repository angeben/prüfen).  
+Dieses Projekt steht unter einer offenen Lizenz.
 
-## Danksagung ❤️
-- betterbahn (Open Source Projekt)  
+## Danke An ❤️
+- betterbahn (Open Source Projekt) (https://github.com/l2xu/betterbahn)
 - Node.js, pnpm  
 - 7‑Zip, WinRAR (optionale Entpack‑Tools)  
 
