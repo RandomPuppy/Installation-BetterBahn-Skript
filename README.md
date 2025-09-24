@@ -1,150 +1,87 @@
-BetterBahn Windows Auto-Setup 🚂🪟
-Einfacher geht’s kaum: Diese kleine Windows-App (eine einzige CMD-Datei) richtet die lokale BetterBahn-Devversion automatisch ein – inklusive Installation der Grundlagen, Download der App, Entpacken, Abhaengigkeiten laden, Startdatei erzeugen und Start des lokalen Servers samt Browser-Tab zu localhost. Kein Vorwissen noetig. 🎉
-
-Plattform: Windows 10/11
-
-Modus: Lokal, offline nutzbar nach Setup
-
-Fokus: Komfort-Setup fuer das Open-Source-Projekt „BetterBahn“
-
-💡 Was macht die CMD genau?
-Die CMD fuehrt alle noetigen Schritte in sicherer Reihenfolge aus und erklaert jeden Schritt gut sichtbar im Konsolenfenster:
-
-Admin-Rechte pruefen und bei Bedarf mit 5‑Sekunden‑Countdown als Admin neu starten (Anzeige: „Neustart in 5 s …“)
-
-Windows Paketquellen (winget) aktualisieren und absichern
-
-Node.js installieren oder aktualisieren (OpenJS.NodeJS)
-
-pnpm bereitstellen (PowerShell-Installer mit Binary-Fallback)
-
-BetterBahn als ZIP aus dem offiziellen Repo herunterladen
-
-Entpacken in einen stabilen Benutzerordner (%LOCALAPPDATA%\Programs\BetterBahn)
-
-App-Dateien an Zielort kopieren und aufraeumen
-
-pnpm und corepack lokalisieren, Abhaengigkeiten installieren
-
-corepack enable sowie corepack prepare pnpm@latest --activate
-
-Eine Startdatei Start_BetterBahn.cmd im App-Ordner erzeugen
-
-Eine Desktop-Verknuepfung BetterBahn.lnk zu dieser Startdatei anlegen
-
-Direkt im Hauptskript: Browser-Tab zu http://localhost:49200 oeffnen und Dev-Server starten
-
-Hinweis: Der Port ist standardmaessig 49200 und kann spaeter angepasst werden (siehe Abschnitt „Anpassen“).
-
-✨ Vorteile
-Zero-Fussel: Kein manuelles Klicken durch Installer – einfach starten
-
-Selbsterklaerend: Grosse Schritt-Headlines erklaeren was gerade passiert
-
-Robust: Fallbacks beim Entpacken, bei pnpm-Setup und beim Serverstart
-
-Komfort: Startdatei + Desktop-Verknuepfung fuer 1‑Klick‑Start in Zukunft
-
-Offen: Reiner Klartext, keine Obfuskation, lokale Ausfuehrung
-
-🚀 Schnellstart
-CMD-Datei herunterladen und per Rechtsklick „Als Administrator ausfuehren“ starten
-
-Den Anzeigen im Fenster folgen – alles laeuft automatisch
-
-Nach Abschluss oeffnet sich der Browser automatisch zu localhost:49200
-
-Fuer kuenftige Starts: Einfach auf die Desktop-Verknuepfung „BetterBahn“ klicken
-
-Tipp: Falls das Fenster einmal zu schnell schliesst, die CMD ueber „Eingabeaufforderung als Administrator“ starten, damit alle Meldungen sichtbar bleiben.
-
-🧩 Voraussetzungen (werden soweit moeglich automatisch erfuellt)
-Windows 10 oder 11
-
-Internetzugang (Download von Node.js, pnpm, GitHub-Archiv)
-
-winget (App Installer) – wird geprueft und Quellen werden aktualisiert
-
-PowerShell ist normalerweise vorhanden (fuer pnpm-Standardinstallation)
-
-curl ist ab Windows 10 standardmaessig nutzbar (Download der ZIP-Datei)
-
-Keine Sorge: Die CMD prueft alles und bietet Fallbacks, falls ein Standardweg nicht funktioniert.
-
-🛠️ Anpassen
-Port aendern: In der CMD „DEV_PORT=49200“ auf den Wunschport setzen
-
-Browser-Start deaktivieren: Die „start "" "http://localhost:PORT"“-Zeile kann bei Bedarf entfernt werden
-
-Speicherort der App: Standard ist %LOCALAPPDATA%\Programs\BetterBahn
-
-🧪 Troubleshooting
-„Bitte als Admin neu starten“ – Die CMD zeigt einen 5‑Sekunden‑Timer und startet automatisiert mit Admin-Rechten neu. Danach im Dialog „Zulassen“ klicken.
-
-„pnpm nicht gefunden“ – Die CMD installiert pnpm via PowerShell-Installer; falls das scheitert, wird ein Binary-Fallback genutzt. Danach die CMD ggf. neu oeffnen.
-
-Entpacken scheitert – Die CMD nutzt Windows-Bordmittel (Shell.Application) und, wenn noetig, 7‑Zip/WinRAR als Fallback. Bei sehr langen Pfaden hilft ein kuerzerer Zielpfad oder genug freier Speicherplatz.
-
-Dev-Server startet nicht – Es gibt drei Startversuche:
-
-pnpm run dev -p PORT
-
-pnpm run dev mit PORT als Umgebungsvariable
-
-pnpm run dev -- --port PORT
-Pruefe Logs im Terminal, installiere fehlende Abhaengigkeiten oder pruefe, ob der Port bereits belegt ist.
-
-🧰 Was installiert/ruft die CMD ab?
-Node.js (OpenJS.NodeJS) per winget
-
-pnpm via PowerShell-Installer (get.pnpm.io) oder Binary-Fallback
-
-BetterBahn-Quellarchiv (ZIP) vom offiziellen Repo
-
-Danach werden App-Abhaengigkeiten per pnpm installiert und corepack fuer pnpm aktiviert
-
-Die Ziele sind ueblich und nachvollziehbar; keine ungewoehnlichen Endpunkte. Alles ist im Klartext in der CMD einsehbar.
-
-🔒 Sicherheit, Antivirus und Vertrauen
-Hinweis: Manche Antivirus-Programme oder SmartScreen koennen bei Skripten, die Software automatisch herunterladen und installieren, vorsorglich anschlagen. Das ist technisch verstaendlich – insbesondere bei CMD/PowerShell/Download-Kombinationen.
-
-Nutzung auf eigene Gefahr: Die CMD ist fuer den persoenlichen Gebrauch gedacht. Bitte pruefe den Inhalt bei Bedarf – der Code ist oeffentlich, unveraendert einsehbar und kann von jedem ueberprueft werden.
-
-Keine Datenabgriffe: Es werden keine privaten Daten erfasst oder versendet – die CMD arbeitet lokal und nutzt nachvollziehbare Downloads (Node.js, pnpm, GitHub-Archiv).
-
-Tipp: Wenn ein AV anschlaegt, kann temporaeres Zulassen noetig sein. Alternativ die CMD in einer Testumgebung ausfuehren.
-
-⚖️ Rechtliches und fair use
-BetterBahn ist ein Open-Source-Projekt; dieses Setup-Skript richtet lediglich die lokale Entwicklungsinstanz ein und nimmt selbst keine Buchungen vor.
-
-Bitte stets die Nutzungsbedingungen der jeweiligen Anbieter beachten.
-
-Ticket-Splitting kann in manchen Konstellationen besondere Bedingungen haben (z.B. Umstiegspflichten, Verspaetungsregeln). Bitte eigenverantwortlich pruefen.
-
-Keine Gewaehr: Es gibt keine Garantie auf Funktion, Vollstaendigkeit oder Korrektheit. Nutzung auf eigenes Risiko.
-
-🧭 Warum lokal?
-Lokal bedeutet: maximale Transparenz, volle Kontrolle, keine versteckten Server.
-
-Ideal, um Funktionen auszuprobieren, ohne etwas am System dauerhaft zu veraendern.
-
-Einfache Deinstallation: Den Zielordner loeschen und die Desktop-Verknuepfung entfernen.
-
-🤝 Mitmachen
-Vorschlaege? Verbesserungen? Pull Requests willkommen.
-
-Bug gefunden? Bitte mit moeglichst genauer Fehlerbeschreibung, Windows-Version und Konsole-Ausgabe melden.
-
-📄 Lizenz
-Freie Nutzung fuer private, nicht-kommerzielle Zwecke.
-
-Fuer weitergehende Nutzung und Einbettung bitte vorher Pruefung der jeweiligen Projekt-Lizenz von BetterBahn und Abhaengigkeiten.
-
-🙏 Dank
-BetterBahn Community
-
-Node.js, pnpm, winget
-
-Alle, die Open-Source moeglich machen
-
-Viel Freude mit dem bequemen Setup – und allzeit gute Fahrt! 🚆💙
+⚠️ Hinweis vorab  
+Antivirenprogramme können bei Skripten, die Programme automatisch herunterladen und installieren, vorsorglich Alarm schlagen (falsch-positiv). Die Nutzung geschieht auf eigenes Risiko. Der Code ist vollständig offen einsehbar, leicht überprüfbar und macht nichts Gefährliches – er automatisiert nur transparente Einzelschritte (Download, Entpacken, Einrichten). Bitte bei Nachfragen des Systems auf “Zulassen” klicken, wenn das Skript Administratorrechte anfordert und gegebenenfalls die cmd auf die Ausschluss-Liste des Antivirus setzten.
+
+# BetterBahn Ein-Klick-Setup (Windows) 🚆💡
+
+Eine komfortable CMD “App” für Windows 10/11, die die Open-Source-App “betterbahn” lokal vorbereitet und startklar macht – inklusive Node.js/pnpm‑Einrichtung, Download, Entpacken, Abhängigkeiten installieren, Desktop‑Verknüpfung anlegen und automatischem Browser‑Start auf http://localhost:49200.  
+
+- 100% lokal, ohne Konto oder Telemetrie  
+- Quelloffen und nachvollziehbar  
+- Komfortabel für Einsteiger, praktisch für Fortgeschrittene
+
+## Was macht die CMD? ✨
+- Prüft und installiert die technische Grundlage (Node.js) via winget.  
+- Installiert pnpm über den offiziellen PowerShell‑Installer (mit Binary‑Fallback).  
+- Lädt das betterbahn‑ZIP von GitHub, entpackt es und kopiert die App an einen festen, benutzerfreundlichen Ort.  
+- Installiert App‑Abhängigkeiten (pnpm install), aktiviert corepack und pnpm projektweit.  
+- Legt eine Startdatei Start_BetterBahn.cmd im App‑Ordner an und erstellt eine Desktop‑Verknüpfung.  
+- Öffnet den Standard‑Browser auf http://localhost:49200 und startet den lokalen Dev‑Server.  
+- Falls nicht als Administrator gestartet: Zeigt einen 5‑Sekunden‑Countdown an und startet sich danach automatisch mit Admin‑Rechten neu (Bitte “Zulassen”).  
+
+## Schnellstart 🚀
+1) Lade die CMD (BetterBahn‑Setup.cmd) herunter und speichere sie lokal.  
+2) Rechtsklick → Als Administrator ausführen.  
+3) Den großen, gut lesbaren Schritt‑Hinweisen folgen – es läuft alles automatisch.  
+4) Nach “FERTIG” ist auf dem Desktop eine Verknüpfung “BetterBahn” vorhanden.  
+5) Für künftige Starts: Doppelklick auf “BetterBahn” (oder Start_BetterBahn.cmd im App‑Ordner).  
+
+## Voraussetzungen 🧰
+- Windows 10/11 mit Internetzugang  
+- Windows App Installer (winget) empfohlen  
+- PowerShell ist standardmäßig vorhanden  
+- Optional: 7‑Zip oder WinRAR (für Entpack‑Fallback)  
+
+## Wo landet die App? 📁
+- App‑Ordner: %LOCALAPPDATA%\Programs\BetterBahn  
+- Startdatei: %LOCALAPPDATA%\Programs\BetterBahn\Start_BetterBahn.cmd  
+- Desktop‑Verknüpfung: BetterBahn.lnk  
+
+## Was passiert unter der Haube? 🔧
+- Admin‑Check: Bei fehlenden Rechten 5‑Sekunden‑Countdown → Neustart mit Admin‑Rechten.  
+- winget‑Quellen aktualisieren; Node.js (OpenJS.NodeJS) installieren/prüfen.  
+- pnpm installieren: PowerShell‑Einzeiler (offiziell) → Fallback Binary falls nötig.  
+- betterbahn‑ZIP laden, per VBScript/Shell.Application entpacken; Fallback: 7‑Zip/WinRAR.  
+- Dateien an Zielort kopieren; danach pnpm install, corepack enable, corepack prepare pnpm@latest --activate.  
+- Startdatei + Desktop‑Verknüpfung erzeugen; Browser öffnen; Dev‑Server auf Port 49200 starten.  
+
+## Sicherheit, Transparenz & Privatsphäre 🔒
+- Quelloffen: Die CMD ist lesbar, ändert keine Systemeinstellungen abseits der genannten Tools.  
+- Downloads erfolgen aus offiziellen Quellen (open‑source Repos/Installer).  
+- Keine Telemetrie, keine Datensammlung, keine stille Registrierung.  
+- Antiviren‑Hinweis: Einige Scanner schlagen bei Automationsskripten präventiv an – hier handelt es sich um harmlose Abläufe. Nutzung auf eigene Verantwortung.  
+
+## Häufige Fragen (FAQ) ❓
+- “Mein Virenschutz warnt – ist das gefährlich?”  
+  Vorsorgliche Warnungen sind bei Automationsskripten normal. Der Code ist transparent, lädt nur notwendige Komponenten und richtet die App lokal ein. Bei Unsicherheit den Inhalt vor Ausführung einsehen.  
+- “Brauche ich Admin‑Rechte?”  
+  Empfohlen, damit Installation/Setup reibungslos erfolgen. Das Skript zeigt einen 5‑Sekunden‑Timer und startet sich automatisch erhöht neu.  
+- “Der Port 49200 ist belegt.”  
+  In Start_BetterBahn.cmd bzw. im Setup‑Skript DEV_PORT einfach auf einen freien Port ändern (z. B. 49210).  
+- “pnpm wird nicht gefunden.”  
+  Nach Installation Fenster neu öffnen oder PATH‑Anpassung in der Sitzung sicherstellen. Das Skript versucht dies bereits automatisch und nutzt mehrere Suchpfade.  
+- “Entpacken schlägt fehl.”  
+  Optional 7‑Zip oder WinRAR installieren und erneut ausführen.  
+
+## Tipps zur Anpassung 🧩
+- Port ändern: DEV_PORT im Skript/Starter anpassen.  
+- Browser‑Start deaktivieren: In Start_BetterBahn.cmd die start "" "http://localhost:PORT"‑Zeile auskommentieren.  
+- Eigenen Zielordner verwenden: FINAL_DST im Setup‑Skript ändern (fortgeschritten).  
+
+## Deinstallation 🗑️
+- BetterBahn‑Ordner löschen: %LOCALAPPDATA%\Programs\BetterBahn  
+- Desktop‑Verknüpfung entfernen  
+- Optional: Node.js via winget deinstallieren (winget uninstall OpenJS.NodeJS)  
+- Optional: pnpm‑Ordner im %LOCALAPPDATA% bereinigen  
+
+## Beiträge willkommen 🤝
+Fehler gefunden, Idee oder Verbesserung? Pull Requests und Issue‑Meldungen sind sehr willkommen – bitte mit kurzer Problembeschreibung, Log‑Ausschnitt und Windows‑Version.  
+
+## Lizenz 📜
+Dieses Projekt steht unter einer offenen Lizenz (bitte im Repository angeben/prüfen).  
+
+## Danksagung ❤️
+- betterbahn (Open Source Projekt)  
+- Node.js, pnpm  
+- 7‑Zip, WinRAR (optionale Entpack‑Tools)  
+
+Viel Spaß beim Ausprobieren – und gute Fahrt mit cleveren Verbindungen! 🚄✨
